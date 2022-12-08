@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование заказа</title>
+</head>
+<body>
+<h3>Редактирование заказа</h3>
+<form th:method="POST" th:action="@{/admin/order/edit/{id}(id=${editOrder.getId()})}" th:object="${editOrder}">
+    <br>
+    <label hidden for="status"> </label>
+    <textarea hidden th:field="*{status}" placeholder="Статус" id="status"></textarea>
+
+    <select size="6" multiple name="hero[]">
+        <option disabled>Выберите статус</option>
+        <option value="Принят">Принят</option>
+        <option value="Оформлен">Оформлен</option>
+        <option value="Ожидает">Ожидает</option>
+        <option value="Получен">Получен</option>
+        <option value="Отменен">Отменен</option>
+    </select>
+
+
+    <label hidden for="number"> </label>
+    <textarea hidden th:field="*{number}" placeholder="Номер заказа" id="number"></textarea>
+    <label hidden for="price"> </label>
+    <textarea hidden th:field="*{price}" placeholder="Цена" id="price"></textarea>
+    <label hidden for="person"> </label>
+    <textarea hidden th:field="*{person}" placeholder="Цена" id="person"></textarea>
+    <label hidden for="product"> </label>
+    <textarea hidden th:field="*{product}" placeholder="Цена" id="product"></textarea>
+    <label hidden for="dateTime"> </label>
+    <textarea hidden th:field="*{dateTime}" placeholder="Цена" id="dateTime"></textarea>
+    <br>
+    <input type="submit" value="Редактировать">
+</form>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы</title>
+</head>
+<body>
+<h1>Заказы</h1>
+<hr>
+<a href="/admin">Вернуться в личный кабинет</a>
+<hr>
+<form th:method="POST" th:action="@{/admin/orders/search}">
+    <fieldset>
+<label for="search">Поиск по последним четырем символам.</label>
+<input type="search" name="search"  th:value="*{value_search}" id="search">
+        <br>
+        <input type="submit" value="Найти">
+    </fieldset>
+</form>
+<h3>Результат: </h3>
+<div th:each="order : ${search_order}">
+    <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
+    <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">
+    <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+    <p th:text="'Количество: ' + ${order.getCount()}"></p>
+    <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+    <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+    <p th:text="'Статус: ' + ${order.getStatus()}"></p>
+    <p th:text="'Пользователь: ' + ${order.getPerson().getLogin()}"></p>
+    <br>
+    <a th:href="@{/admin/order/edit/{id}(id=${order.getId()})}">Редактировать заказ</a>
+</div>
+<hr>
+<div th:each="order : ${orders}">
+    <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
+    <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">
+    <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+    <p th:text="'Количество: ' + ${order.getCount()}"></p>
+    <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+    <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+    <p th:text="'Статус: ' + ${order.getStatus()}"></p>
+    <p th:text="'Пользователь: ' + ${order.getPerson().getLogin()}"></p>
+    <br>
+    <a th:href="@{/admin/order/edit/{id}(id=${order.getId()})}">Редактировать заказ</a>
+    <br>
+    <br>
+    <a th:href="@{/admin/order/delete/{id}(id=${order.getId()})}">Удалить заказ</a>
+    <hr>
+</div>
+</body>
+</html>

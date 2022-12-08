@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+</head>
+<body>
+<h3>Вход</h3>
+<form method="post" action="/process_login">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    <label for="username">Введите логин: </label>
+    <input type="text" placeholder="Введите пароль" name="username" id="username">
+    <br>
+    <label for="password">Введите пароль: </label>
+    <input type="password" placeholder="Введите пароль" name="password" id="password">
+    <br>
+    <input type="submit" value="Войти">
+    <div th:if="${param.error}" style="color: red">
+        Неправильный логин или пароль
+    </div>
+</form>
+<a href="/auth/registration">Регистрация</a>
+<br>
+<br>
+<form th:method="POST" th:action="@{/product/search}">
+    <fieldset>
+        <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
+        <br>
+        <label for="search">Поиск по наименованию</label>
+        <input type="search" name="search"  th:value="*{value_search}" id="search">
+        <br>
+        <p>Цена, ₽</p>
+        <label for="ot">От</label>
+        <input type="text" name="ot" th:value="*{value_price_ot}" id="ot">
+        <label for="do">До</label>
+        <input type="text" name="do" th:value="*{value_price_do}" id="do">
+        <br>
+        <br>
+        <input type="radio" id="ascending_price" th:value="*{sorted_by_ascending_price}" name="price">
+        <label for="ascending_price">Отсортировать по возрастанию цены</label>
+        <br>
+        <br>
+        <input type="radio" id="descending_price" th:value="*{sorted_by_descending_price}" name="price">
+        <label for="descending_price">Отсортировать по убыванию цены</label>
+        <p>Категория товаров: </p>
+        <input type="radio" id="powerSupplyUnit" name="category" value="powerSupplyUnit" th:value="*{powerSupplyUnit}">
+        <label for="powerSupplyUnit">Блоки питания</label>
+        <br>
+        <br>
+        <input type="radio" id="videoCard" name="category" th:value="*{videoCard}" value="videoCard">
+        <label for=videoCard>Видеокарты</label>
+        <br>
+        <br>
+        <input type="radio" id="body" name="category" th:value="*{body}" value="body">
+        <label for="body">Корпуса</label>
+        <br>
+        <br>
+        <input type="radio" id="ram" name="category" value="ram" th:value="*{ram}">
+        <label for="ram">Оперативная память</label>
+        <br>
+        <br>
+        <input type="radio" id="processor" name="category" value="processor" th:value="*{processor}">
+        <label for="processor">Процессоры</label>
+        <br>
+        <br>
+        <input type="submit" value="Найти">
+    </fieldset>
+</form>
+<h3>Доступные товары: </h3>
+<div th:each="product : ${products}">
+    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+    <br>
+    <br>
+    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
+    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+    <hr>
+</div>
+</body>
+</html>
