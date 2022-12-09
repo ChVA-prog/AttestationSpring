@@ -8,18 +8,8 @@
 <h3>Редактирование заказа</h3>
 <form th:method="POST" th:action="@{/admin/order/edit/{id}(id=${editOrder.getId()})}" th:object="${editOrder}">
     <br>
-    <label hidden for="status"> </label>
-    <textarea hidden th:field="*{status}" placeholder="Статус" id="status"></textarea>
-
-    <select size="6" multiple name="hero[]">
-        <option disabled>Выберите статус</option>
-        <option value="Принят">Принят</option>
-        <option value="Оформлен">Оформлен</option>
-        <option value="Ожидает">Ожидает</option>
-        <option value="Получен">Получен</option>
-        <option value="Отменен">Отменен</option>
-    </select>
-
+    <label for="status"> </label>
+    <textarea th:field="*{status}" placeholder="Статус" id="status"></textarea>
 
     <label hidden for="number"> </label>
     <textarea hidden th:field="*{number}" placeholder="Номер заказа" id="number"></textarea>
