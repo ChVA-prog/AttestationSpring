@@ -1,0 +1,9 @@
+header
+{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    font-family: "AA Bebas Neue", serif;
+    padding: 20px;
+    background-image: url("/static/img/1620271228_30-phonoteka_org-p-fon-dlya-magazina-tekhniki-33.jpg");
+
+}
