@@ -19,53 +19,65 @@
                 <input type="password" placeholder="Введите пароль" name="password" id="password">
                 <input class="signIn_btn" type="submit" value="Войти">
                 <div th:if="${param.error}"> Неправильный логин или пароль</div>
+                <a href="/auth/registration">Регистрация</a>
             </form>
-            <a class="signIn_btn" href="/auth/registration">Регистрация</a>
         </div>
         <div class="header_logo">
             <h1>Комплектующие для ПК</h1>
-            <img src="/img/1.png" alt="Логотип">
+            <img src="/img/logo.png" alt="Логотип">
         </div>
     </header>
-
 
     <form class="search" th:method="POST" th:action="@{/product/search}">
         <fieldset>
             <h2>Выберите параметры для сортировки, поиска, фильтрации</h2>
-            <label for="search">Поиск по наименованию</label>
+            <p>Поиск по наименованию</p>
             <input type="search" name="search"  th:value="*{value_search}" id="search">
             <p>Цена, ₽</p>
-            <label for="ot">От</label>
+            <label class="search_text" for="ot">От</label>
             <input type="text" name="ot" th:value="*{value_price_ot}" id="ot">
-            <label for="do">До</label>
+            <label class="search_text" for="do">До</label>
             <input type="text" name="do" th:value="*{value_price_do}" id="do">
+            <p>Тип сортировки</p>
             <input type="radio" id="ascending_price" th:value="*{sorted_by_ascending_price}" name="price">
-            <label for="ascending_price">Отсортировать по возрастанию цены</label>
+            <label class="search_text" for="ascending_price">Отсортировать по возрастанию цены</label>
             <input type="radio" id="descending_price" th:value="*{sorted_by_descending_price}" name="price">
-            <label for="descending_price">Отсортировать по убыванию цены</label>
+            <label class="search_text" for="descending_price">Отсортировать по убыванию цены</label>
             <p>Категория товаров: </p>
             <input type="radio" id="powerSupplyUnit" name="category" value="powerSupplyUnit" th:value="*{powerSupplyUnit}">
-            <label for="powerSupplyUnit">Блоки питания</label>
+            <label class="search_text" for="powerSupplyUnit">Блоки питания</label>
             <input type="radio" id="videoCard" name="category" th:value="*{videoCard}" value="videoCard">
-            <label for=videoCard>Видеокарты</label>
+            <label class="search_text" for=videoCard>Видеокарты</label>
             <input type="radio" id="body" name="category" th:value="*{body}" value="body">
-            <label for="body">Корпуса</label>
+            <label class="search_text" for="body">Корпуса</label>
             <input type="radio" id="ram" name="category" value="ram" th:value="*{ram}">
-            <label for="ram">Оперативная память</label>
+            <label class="search_text" for="ram">Оперативная память</label>
             <input type="radio" id="processor" name="category" value="processor" th:value="*{processor}">
-            <label for="processor">Процессоры</label>
+            <label class="search_text" for="processor">Процессоры</label>
+            <br>
             <input class="search_btn" type="submit" value="Найти">
         </fieldset>
     </form>
-    <div class="cart">
-        <h3>Доступные товары:</h3>
+    <div class="searchResult">
+        <h3>Результат поиска: </h3>
+        <div th:each="product : ${search_product}">
+            <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+            <br>
+            <br>
+            <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+            <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+        </div>
+    </div>
+    <hr>
+    <h1>Доступные товары:</h1>
+    <div class="cart_section">
 
         <div class="cart_item" th:each="product : ${products}">
             <div class="cart_imgBlock" >
-            <img class="cart_img" th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+                <img class="cart_img" th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
             </div>
             <div>
-            <a class="cart_title" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
+                <a class="cart_title" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
             </div>
             <div>
                 <p class="cart_price" th:text="'Цена: ' + ${product.getPrice()}"></p>

@@ -7,74 +7,84 @@
     <link th:href="@{/css/user/index.module.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
+
 <header>
-<h3>Личный кабинет пользователя</h3>
-<!--<a href="/logout">Выйти из личного кабинета</a>-->
-<form method="post" th:action="@{/logout}">
-    <input type="submit" value="Выйти из личного кабинета">
-</form>
-<form method="get" th:action="@{/cart}">
-    <input type="submit" value="Корзина">
-</form>
-<form method="get" th:action="@{/orders}">
-    <input type="submit" value="Заказы">
-</form>
-    </header>
-<form class="searchForm" th:method="POST" th:action="@{/product/search}">
+    <div class="header_signIn">
+        <form class="signIn" method="post" th:action="@{/logout}">
+            <input class="signIn_btn" type="submit" value="Выйти из личного кабинета">
+        </form>
+        <form class="signIn" method="get" th:action="@{/cart}">
+            <input class="signIn_btn" type="submit" value="Корзина">
+        </form>
+        <form class="signIn" method="get" th:action="@{/orders}">
+            <input class="signIn_btn" type="submit" value="Заказы">
+        </form>
+    </div>
+    <div class="header_logo">
+        <h1>Личный кабинет пользователя</h1>
+    </div>
+</header>
+
+
+
+<form class="search" th:method="POST" th:action="@{/product/search}">
     <fieldset>
-        <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
-        <br>
-        <label for="search">Поиск по наименованию</label>
+        <h2>Выберите параметры для сортировки, поиска, фильтрации</h2>
+        <p>Поиск по наименованию</p>
         <input type="search" name="search"  th:value="*{value_search}" id="search">
-        <br>
         <p>Цена, ₽</p>
-        <label for="ot">От</label>
+        <label class="search_text" for="ot">От</label>
         <input type="text" name="ot" th:value="*{value_price_ot}" id="ot">
-        <label for="do">До</label>
+        <label class="search_text" for="do">До</label>
         <input type="text" name="do" th:value="*{value_price_do}" id="do">
-        <br>
-        <br>
+        <p>Тип сортировки</p>
         <input type="radio" id="ascending_price" th:value="*{sorted_by_ascending_price}" name="price">
-        <label for="ascending_price">Отсортировать по возрастанию цены</label>
-        <br>
-        <br>
+        <label class="search_text" for="ascending_price">Отсортировать по возрастанию цены</label>
         <input type="radio" id="descending_price" th:value="*{sorted_by_descending_price}" name="price">
-        <label for="descending_price">Отсортировать по убыванию цены</label>
+        <label class="search_text" for="descending_price">Отсортировать по убыванию цены</label>
         <p>Категория товаров: </p>
         <input type="radio" id="powerSupplyUnit" name="category" value="powerSupplyUnit" th:value="*{powerSupplyUnit}">
-        <label for="powerSupplyUnit">Блоки питания</label>
-        <br>
-        <br>
+        <label class="search_text" for="powerSupplyUnit">Блоки питания</label>
         <input type="radio" id="videoCard" name="category" th:value="*{videoCard}" value="videoCard">
-        <label for=videoCard>Видеокарты</label>
-        <br>
-        <br>
+        <label class="search_text" for=videoCard>Видеокарты</label>
         <input type="radio" id="body" name="category" th:value="*{body}" value="body">
-        <label for="body">Корпуса</label>
-        <br>
-        <br>
+        <label class="search_text" for="body">Корпуса</label>
         <input type="radio" id="ram" name="category" value="ram" th:value="*{ram}">
-        <label for="ram">Оперативная память</label>
-        <br>
-        <br>
+        <label class="search_text" for="ram">Оперативная память</label>
         <input type="radio" id="processor" name="category" value="processor" th:value="*{processor}">
-        <label for="processor">Процессоры</label>
+        <label class="search_text" for="processor">Процессоры</label>
         <br>
-        <br>
-        <input type="submit" value="Найти">
+        <input class="search_btn" type="submit" value="Найти">
     </fieldset>
 </form>
-<div  class="productCatalog">
-<h3>Доступные товары: </h3>
-<div th:each="product : ${products}">
-    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
-    <br>
-    <br>
-    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
-    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-    <a th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
-    <hr>
+<div class="searchResult">
+    <h3>Результат поиска: </h3>
+    <div th:each="product : ${search_product}">
+        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+        <br>
+        <br>
+        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+    </div>
 </div>
+<hr>
+<div  class="productCatalog">
+    <h1>Доступные товары:</h1>
+    <div class="cart_section">
+
+        <div class="cart_item" th:each="product : ${products}">
+            <div class="cart_imgBlock" >
+                <img class="cart_img" th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+            </div>
+            <div>
+                <a class="cart_title" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}" id="title"></a>
+            </div>
+            <div>
+                <p class="cart_price" th:text="'Цена: ' + ${product.getPrice()}"></p>
+            </div>
+            <a class="search_btn" th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

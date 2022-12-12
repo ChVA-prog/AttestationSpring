@@ -7,19 +7,29 @@
     <link th:href="@{/css/admin/users.module.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
-<h1>Список пользователей</h1>
-<hr>
-<a href="/admin">Вернуться в личный кабинет</a>
-<hr>
-<div th:each="user : ${users}">
-    <p th:text="'Логин: ' + ${user.getLogin()}"></p>
-    <p th:text="'Роль: ' + ${user.getRole()}"></p>
-    <a th:href="@{/admin/users/editRoleAdmin/{id}(id=${user.getId()})}">Сделать админом</a>
-    <br>
-    <a th:href="@{/admin/users/editRoleUser/{id}(id=${user.getId()})}">Сделать юзером</a>
-    <br>
+    <header>
+        <div class="header_back">
+            <a class="header_back_btn" href="/admin">Вернуться в личный кабинет</a>
+        </div>
+        <div class="header_logo">
+            <h1>Добавить товар</h1>
+        </div>
+    </header>
     <hr>
-</form>
-</div>
+    <div class="cart_section">
+        <div class="cart_item" th:each="user : ${users}">
+            <p class="cart_title" th:text="'Логин: ' + ${user.getLogin()}"></p>
+            <p class="cart_price" th:text="'Роль: ' + ${user.getRole()}"></p>
+            <br>
+            <a class="header_back_btn" th:href="@{/admin/users/editRoleAdmin/{id}(id=${user.getId()})}">Сделать админом</a>
+            <br>
+            <br>
+            <br>
+            <a class="header_back_btn" th:href="@{/admin/users/editRoleUser/{id}(id=${user.getId()})}">Сделать юзером</a>
+            <br>
+            <hr>
+            </form>
+        </div>
+    </div >
 </body>
 </html>

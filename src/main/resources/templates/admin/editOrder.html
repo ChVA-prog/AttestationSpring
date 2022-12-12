@@ -7,24 +7,30 @@
     <link th:href="@{/css/admin/editOrder.module.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
-<h3>Редактирование заказа</h3>
-<form th:method="POST" th:action="@{/admin/order/edit/{id}(id=${editOrder.getId()})}" th:object="${editOrder}">
-    <br>
-    <label for="status"> </label>
-    <textarea th:field="*{status}" placeholder="Статус" id="status"></textarea>
+<header>
+    <div class="header_editOrder">
+        <form th:method="POST" th:action="@{/admin/order/edit/{id}(id=${editOrder.getId()})}" th:object="${editOrder}">
+            <br>
+            <label for="status"> </label>
+            <textarea th:field="*{status}" placeholder="Статус" id="status"></textarea>
 
-    <label hidden for="number"> </label>
-    <textarea hidden th:field="*{number}" placeholder="Номер заказа" id="number"></textarea>
-    <label hidden for="price"> </label>
-    <textarea hidden th:field="*{price}" placeholder="Цена" id="price"></textarea>
-    <label hidden for="person"> </label>
-    <textarea hidden th:field="*{person}" placeholder="Цена" id="person"></textarea>
-    <label hidden for="product"> </label>
-    <textarea hidden th:field="*{product}" placeholder="Цена" id="product"></textarea>
-    <label hidden for="dateTime"> </label>
-    <textarea hidden th:field="*{dateTime}" placeholder="Цена" id="dateTime"></textarea>
-    <br>
-    <input type="submit" value="Редактировать">
-</form>
+            <label hidden for="number"> </label>
+            <textarea hidden th:field="*{number}" placeholder="Номер заказа" id="number"></textarea>
+            <label hidden for="price"> </label>
+            <textarea hidden th:field="*{price}" placeholder="Цена" id="price"></textarea>
+            <label hidden for="person"> </label>
+            <textarea hidden th:field="*{person}" placeholder="Цена" id="person"></textarea>
+            <label hidden for="product"> </label>
+            <textarea hidden th:field="*{product}" placeholder="Цена" id="product"></textarea>
+            <label hidden for="dateTime"> </label>
+            <textarea hidden th:field="*{dateTime}" placeholder="Цена" id="dateTime"></textarea>
+            <br>
+            <input class="editOrder_btn" type="submit" value="Редактировать">
+        </form>
+    </div>
+    <div>
+        <h1>Редактирование заказа</h1>
+    </div>
+</header>
 </body>
 </html>

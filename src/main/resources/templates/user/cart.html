@@ -7,16 +7,38 @@
     <link th:href="@{/css/user/cart.module.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
-<h3>Корзина товаров</h3>
-<div th:each="product : ${cart_product}">
-    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
-    <br>
-    <br>
-    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-    <a th:href="@{/cart/delete/{id}(id=${product.getId()})}">Удалить</a>
-</div>
+
+    <header>
+        <div class="header_Back">
+            <a class="header_Back_btn" href="/admin">Вернуться в личный кабинет</a>
+        </div>
+        <div class="header_logo">
+            <h1>Корзина</h1>
+        </div>
+    </header>
+
+    <div class="cart_section">
+
+        <div class="cart_item" th:each="product : ${cart_product}">
+            <div class="cart_imgBlock">
+                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+            </div>
+
+            <br>
+            <br>
+            <div class="cart_title">
+                <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+            </div>
+            <div class="cart_price">
+                <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+            </div>
+            <a class="header_Back_btn" th:href="@{/cart/delete/{id}(id=${product.getId()})}">Удалить</a>
+        </div>
+
+    </div>
+
 <h3 th:text="'Итоговая цена: ' + ${price}"></h3>
-<a href="/order/create">Оформить заказ</a>
+    <br>
+<a class="header_Back_btn" href="/order/create">Оформить заказ</a>
 </body>
 </html>

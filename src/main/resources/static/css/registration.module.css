@@ -1,0 +1,43 @@
+.header
+{
+
+    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    border-radius: 40px;
+    align-items: center;
+    background-image: url("static/img/banner.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.header_signUp
+{
+    color: blue;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.signUp_btn
+{
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 15px;
+    border-radius: 20px;
+    border: none;
+    transition: box-shadow 0.5s;
+}
+.signUp_btn:hover{
+    box-shadow:7px 9px 17px 0px black;
+}
+
+.header_signUp input
+{
+    margin: 10px;
+}

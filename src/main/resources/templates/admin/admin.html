@@ -7,30 +7,42 @@
   <link th:href="@{/css/admin/admin.module.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
-<header>
-<h3>Личный кабинет администратора</h3>
-<form th:method="POST" th:action="@{/logout}">
-  <input type="submit" value="Выйти из личного кабинета">
-</form>
-<a href="/admin/product/add">Добавить товар</a>
-<a href="/admin/orders">Просмотр заказов</a>
-<a href="/admin/users">Просмотр пользователей</a>
-</header>
-<div class="productCatalog">
-<h3>Каталог товаров: </h3>
-<hr>
-  <div th:each="product : ${products}">
-    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
-    <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
-    <p th:text="'Описание: ' + ${product.getDescription()}"></p>
-    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-    <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
-    <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
-    <p th:text="'Категория товара: ' + ${product.getCategory().getName()}"></p>
-    <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактировать товар</a>
-    <a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}">Удалить товар</a>
-    <hr>
+  <header>
+    <div class="header_signOut">
+      <form th:method="POST" th:action="@{/logout}">
+        <input class="signOut_btn" type="submit" value="Выйти из личного кабинета">
+      </form>
+      <a href="/admin/product/add">Добавить товар</a>
+      <a href="/admin/orders">Просмотр заказов</a>
+      <a href="/admin/users">Просмотр пользователей</a>
+    </div>
+    <div >
+      <h1>Личный кабинет администратора</h1>
+    </div>
+  </header>
+  <div class="productCatalog">
+    <h1>Каталог товаров: </h1>
+    <div class="cart_section">
+      <hr>
+      <div class="cart_item" th:each="product : ${products}">
+        <div class="cart_imgBlock" >
+          <img class="cart_img" th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+        </div>
+        <div>
+          <p class="cart_title" th:text="'Наименование: ' + ${product.getTitle()}"></p>
+        </div>
+        <div>
+          <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+          <p class="cart_price" th:text="'Цена: ' + ${product.getPrice()}"></p>
+          <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+          <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
+          <p th:text="'Категория товара: ' + ${product.getCategory().getName()}"></p>
+          <a class="signOut_btn" th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактировать товар</a>
+          <a class="signOut_btn" th:href="@{/admin/product/delete/{id}(id=${product.getId()})}">Удалить товар</a>
+          <hr>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 </body>
 </html>

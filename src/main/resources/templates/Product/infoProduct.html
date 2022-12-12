@@ -7,14 +7,28 @@
     <link th:href="@{/css/product/infoProduct.module.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
-<p th:text="'Наименование: ' + ${product.getTitle()}"></p>
-<p th:text="'Описание: ' + ${product.getDescription()}"></p>
-<p th:text="'Цена: ' + ${product.getPrice()}"></p>
-<p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
-<p th:text="'Продавец: ' + ${product.getSeller()}"></p>
-<p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
-<div th:each="img : ${product.getImageList()}">
-    <img th:src="'/img/' + ${img.getFileName()}" width="300px">
+<div class="main">
+    <header>
+        <div class="header_back">
+            <a class="header_back_btn" href="/index">Вернуться</a>
+        </div>
+        <div class="header_logo">
+            <h1>Подробная информация</h1>
+        </div>
+    </header>
+    <div class="cart_section">
+        <p class="cart_title" th:text="'Наименование: ' + ${product.getTitle()}"></p>
+        <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+        <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+        <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
+        <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+        <div class="cart_imgBlock" th:each="img : ${product.getImageList()}">
+            <img class="cart_img" th:src="'/img/' + ${img.getFileName()}" width="300px">
+        </div>
+    </div>
+
 </div>
+
 </body>
 </html>
