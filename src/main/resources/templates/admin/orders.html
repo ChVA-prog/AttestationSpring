@@ -29,9 +29,10 @@
     </fieldset>
 </form>
 
-<h1>Результат: </h1>
+
     <div class="cart_section">
         <div class="cart_item" th:each="order : ${search_order}">
+            <h1>Результат: </h1>
             <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
             <div class="cart_imgBlock">
                 <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="300px">
